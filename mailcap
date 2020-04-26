@@ -1,0 +1,13 @@
+#text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -dump %s; nametemplate=%s.html; copiousoutput
+#text/html; w3m -T text/html -dump %s; copiousoutput
+#text/html; google-chrome-stable %s ; test=test -n "$DISPLAY"; needsterminal;
+#text/html; firefox %s ; needsterminal;
+#text/html; w3m -I %{charset} -T text/html -dump %s; copiousoutput
+#application/pdf; apvlv %s ;
+#image/*; feh %s; needsterminal;
+#application/msword; libreoffice %s; needsterminal;
+#application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice %s; needsterminal;
+#application/vnd.oasis.opendocument.spreadsheet; libreoffice %s; needsterminal;
+#application/vnd.ms-excel; libreoffice %s; needsterminal;
+application/*; mkdir -p /tmp/mutt \; cp %s /tmp/mutt \; xdg-open /tmp/mutt/$(basename %s) &
+text/html; mkdir -p /tmp/mutt \; cp %s /tmp/mutt \; firefox /tmp/mutt/$(basename %s) &

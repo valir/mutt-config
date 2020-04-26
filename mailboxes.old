@@ -1,0 +1,7 @@
+# vi:syntax=muttrc
+
+mailboxes imaps://barlog.rusu.info:993/INBOX
+mailboxes imaps://barlog.rusu.info:993/INBOX.kde
+mailboxes imaps://barlog.rusu.info:993/INBOX.sourceforge
+mailboxes imaps://barlog.rusu.info:993/INBOX.i3
+

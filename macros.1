@@ -1,0 +1,14 @@
+# vi:syntax=muttrc
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
+
+macro index t "<pipe-message>mutt2task"
+macro index,pager a "<pipe-message>goobook add<return>" "add sender to google contacts"
+macro pager ,l "<pipe-message>lbdb-fetchaddr"
+macro pager ,a ":set pipe_decode\nvjjj|mutt-ical.sh -a\nq:unsetpipe_decode\n" "Accept the meeting request"
+macro pager ,r ":set pipe_decode\nvjjj|mutt-ical.sh -r\nq:unsetpipe_decode\n" "Reject the meeting request"
+macro pager ,t ":set pipe_decode\nvjjj|mutt-ical.sh -t\nq:unsetpipe_decode\n" "Reject the meeting request"
+macro index ,v  "<pipe-message>~/bin/viewhtmlmail.py\n" "View HTML in browser"
+macro pager ,v  "<pipe-message>~/bin/viewhtmlmail.py\n" "View HTML in browser"
+# for the folder hooks
+macro index \e1 ":set from=valentin.rusu@april.com\n:set status_format = \"───[%r-valentin.rusu@april.com]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───\"\n" "Switch to valentin.rusu@april.com"
+

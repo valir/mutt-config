@@ -1,0 +1,10 @@
+# vi:syntax=muttrc
+
+subscribe authentication@lists.freedesktop.org
+subscribe kde-core-devel@kde.org
+subscribe release-team@kde.org
+subscribe kde-frameworks-devel@kde.org
+subscribe vimprobable-users@lists.sourceforge.net
+subscribe i3-discuss@i3.zekjur.net
+subscribe romania@altersystems.fr
+

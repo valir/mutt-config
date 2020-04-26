@@ -1,0 +1,11 @@
+# vi:syntax=muttrc
+
+folder-hook .                       source ~/.mutt/defaults
+#folder-hook "!$"            source ~/.mutt/defaults
+folder-hook =rusu/INBOX.kde.*$           source ~/.mutt/defaults.kde
+folder-hook =rusu/INBOX.sourceforge.*$   source ~/.mutt/defaults.sourceforge
+folder-hook =rusu/INBOX.i3.*$            source ~/.mutt/defaults.i3
+
+folder-hook =faintech/office/.*$       source ~/.mutt/defaults.faintech-office
+folder-hook =faintech/valentin/.*$     source ~/.mutt/defaults.faintech-valentin
+

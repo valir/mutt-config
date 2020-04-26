@@ -1,0 +1,82 @@
+set hostname    = sisif.rusu.info
+set hidden_host
+set alias_file  =~/.mutt/aliases
+set postpone    = ask-no
+set postponed   = +postponed
+set nomove
+set print=ask-yes
+set delete=ask-yes
+set askcc=yes
+set include
+set sort_aux = reverse-last-date-received
+set charset = utf-8
+set noallow_8bit
+set attribution = "* %n <%a> [%{%Y-%m-%d %H:%M:%S %Z}]:\n"
+set edit_headers
+set editor = "vim"
+#set query_command = "lbdbq '%s'"
+# set query_command = "pc_query -m %s"
+set query_command = "lbdbq '%s'; pc_query -m '%s' | sed 1d"
+set nomark_old
+set mbox=+mbox
+set copy
+set beep_new
+set nosmart_wrap
+set nomarkers
+set mime_forward
+set pager_context = 3
+set nostrict_threads
+set sendmail_wait = -1
+set pipe_decode
+set print_command="a2ps -1gEmail --borders=no --strip=3"
+set tilde
+set read_inc=100
+set write_inc=100
+set noconfirmappend
+set pager_stop
+set mailcap_path = ~/.mutt/mailcap
+source /usr/share/doc/mutt/samples/gpg.rc
+set quit
+set delete
+set confirmappend
+unset mark_old
+set sort = threads
+set uncollapse_jump
+set sort_re
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+set header_cache = ~/.cache/mutt
+set message_cachedir = ~/.cache/mutt
+set mail_check = 120
+set timeout = 15
+auto_view = text/html
+set date_format = "%d/%m/%y %T"
+set status_format = "───[%r]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+set folder = "~/Mail"
+# set spoolfile = "~/Mail/rusu/INBOX"
+# set record = "~/Mail/rusu/Sent"
+
+source ~/.mutt/auto_views
+source ~/.mutt/aliases
+source ~/.mutt/subscribtions
+source ~/.mutt/mailboxes
+source ~/.mutt/headers
+#source ~/.mutt/save-hooks
+#source ~/.mutt/fcc-hooks
+source ~/.mutt/message-hooks
+source ~/.mutt/bindings
+source ~/.mutt/macros
+source ~/.mutt/folderhooks
+source ~/.mutt/colors
+
+#set sendmail    ="/usr/bin/msmtp"
+set sendmail = "~/bin/msmtp-enqueue.sh"
+
+
+set status_chars  = " *%A"
+
+set envelope_from   =yes
+alternates ^valentin@rusu.info$ ^kde@rusu.info$ ^valentin.i.rusu@gmail.com ^i3wm@rusu.info ^valentin@faintech.eu ^office@faintech.eu$
+set use_from
+
+alternative_order text/enriched text/plain text/html
+

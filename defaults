@@ -1,0 +1,16 @@
+# vi:syntax=muttrc
+
+# Use the global defaults first.
+source ~/.mutt/defaults.global
+set record = "~/Mail/rusu/Sent"
+
+# This is the index format for non-list folders.
+# set index_format="%4C %Z %{%b %d} %-15.15L (%4l) %s"
+set index_format="%4C %4Z %D %-25.25F %s"
+
+# By default use the default value for abort_nosubject
+reset abort_nosubject
+
+# Always verify signatures by default.
+set pgp_verify_sig
+push ,e1

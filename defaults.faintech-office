@@ -1,0 +1,27 @@
+# vi:syntax=muttrc
+
+set spoolfile = "~/Mail/faintech/office/INBOX"
+set record = "~/Mail/faintech/office/Sent"
+# Null out any folder specific keys.
+bind index @ noop
+
+# Set default signature
+set signature = ~/.mutt/signature.faintech-office
+
+# Start off with index footer in pager.
+set pager_index_lines=1
+
+# Reset any headers that may have been set in other folder-hooks
+unmy_hdr From:
+unmy_hdr Reply-To:
+unmy_hdr Fcc:
+unmy_hdr Return-Receipt-To:
+unmy_hdr Organization:
+unmy_hdr X-URL:
+
+my_hdr From: Fain Tech srl<office@faintech.eu>
+my_hdr Organization: Fain Tech srl
+my_hdr X-URL: https://faintech.eu
+
+push ,e5
+

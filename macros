@@ -1,0 +1,53 @@
+# vi:syntax=muttrc
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
+
+macro index <F5> "<sync-mailbox>:set wait_key=no\n!pkill -SIGRTMIN+12 i3blocks"
+# macro index t "<pipe-message>mutt2task<enter> <save-message>+TODO<enter>"
+macro index ,t "<pipe-message>mutt2task"
+macro pager ,l "<pipe-message>lbdb-fetchaddr"
+macro pager ,a ":set pipe_decode\nvjjj|mutt-ical.sh -a\nq:unsetpipe_decode\n" "Accept the meeting request"
+macro pager ,r ":set pipe_decode\nvjjj|mutt-ical.sh -r\nq:unsetpipe_decode\n" "Reject the meeting request"
+macro pager ,t ":set pipe_decode\nvjjj|mutt-ical.sh -t\nq:unsetpipe_decode\n" "Reject the meeting request"
+macro index ,j ":set confirmappend=no delete=yes auto_tag=yes\n<save-message>=rusu/Junk\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n" "Send message to Junk folder"
+
+# macro index ,v  "<pipe-message>~/bin/viewhtmlmail.py\n" "View HTML in browser"
+# macro pager ,v  "<pipe-message>~/bin/viewhtmlmail.py\n" "View HTML in browser"
+macro attach 'V' "<pipe-entry>cat >~/.cache/mutt-mail.html && firefox ~/.cache/mutt-mail.html && rm ~/.cache/mutt-mail.html<enter>"
+
+macro index ,ss \
+  "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+  <shell-escape>notmuch-mutt -r --prompt search<enter>\
+  <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+  <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+  "notmuch: search mail"
+
+macro index ,sr \
+  "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+  <pipe-message>notmuch-mutt -r thread<enter>\
+  <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+  <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+  "notmuch: reconstruct thread"
+
+macro index ,st \
+  "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+  <pipe-message>notmuch-mutt tag -- -inbox<enter>\
+  <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+  "notmuch: remove message from inbox"
+
+macro index,pager X "<pipe-message>ripmime -i - -d "
+
+#
+# for the folder hooks
+# macro index ,e1 ":set status_format = \"───[%r-valentin@rusu.info]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───\"\n" "Switch to valentin@rusu.info"
+#
+# macro index ,e2 ":set status_format = \"───[%r-kde@rusu.info]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───\"\n" "Switch to kde@rusu.info"
+#
+# macro index ,e3 ":set status_format = \"───[%r-sourceforge@rusu.info]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───\"\n" "Switch to sourceforge@rusu.info"
+#
+# macro index ,e4 ":set status_format = \"───[%r-i3wm@rusu.info]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───\"\n" "Switch to i3wm@rusu.info"
+#
+# #
+# # Fain Tech
+# macro index ,e5 ":set status_format = \"───[%r-office@faintech.eu]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───\"\n" "Switch to office@faintech.eu"
+#
+# macro index ,e6 ":set status_format = \"───[%r-valentin@faintech.eu]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───\"\n" "Switch to office@faintech.eu"

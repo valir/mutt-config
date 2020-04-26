@@ -1,0 +1,120 @@
+#set folder      = imaps://192.168.0.1:993/
+set folder      = imaps://barlog.rusu.info:993/
+set record      = +Sent
+set imap_user   =valentin@rusu.info
+set imap_pass   =
+set spoolfile   = +INBOX
+set imap_check_subscribed=yes
+set header_cache = ~/.cache/mutt
+set message_cachedir = "~/.cache/mutt"
+unset imap_passive
+set imap_keepalive = 300
+set mail_check = 120
+set timeout = 15
+set certificate_file = ~/.mutt/certs
+unset ssl_verify_host
+set askcc=yes
+
+#source ~/.mutt/colors.andreaveri
+source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-light-256.muttrc
+
+#### colors begin
+
+color hdrdefault cyan default
+color attachment yellow default
+
+color header brightyellow default "From: "
+color header brightyellow default "Subject: "
+color header brightyellow default "Date: "
+
+color quoted green default
+color quoted1 cyan default
+color quoted2 green default
+color quoted3 cyan default
+
+color error     red             default         # error messages
+color message   white           default         # message  informational messages
+color indicator white           red             # indicator for the "current message"
+color status    white           blue            # status lines in the folder index sed for the mini-help line
+color tree      red             default         # the "tree" display of threads within the folder index
+color search    white           blue            # search matches found with search within the internal pager
+color markers   red             default         # The markers indicate a wrapped line hen showing messages with looong lines
+
+color index     yellow default  '~O'
+color index     yellow default  '~N'
+color index     brightred       default '~F'    # Flagged Messages are important!
+color index     blue default    '~D'            # Deleted Mails - use dark color as these are already "dealt with"
+
+#### colors end
+
+set mailcap_path = ~/.mutt/mailcap
+auto_view = text/html
+alternative_order text/plain text/html
+set date_format = "%d/%m/%y %T"
+
+set sendmail    ="/usr/bin/msmtp"
+set edit_headers=yes
+
+set query_command = "goobook query '%s'"
+macro index,pager a "<pipe-message>goobook add<return>" "add sender to google contacts"
+bind editor <Tab> complete-query
+set quit
+set delete
+set confirmappend
+unset mark_old
+set beep_new
+set pipe_decode
+
+# sidebar
+set sidebar_delim = ' │'
+set sidebar_visible = no
+set sidebar_width = 50
+
+# Sidebar Navigation ---------------------------------
+#bind index,pager \Cj   sidebar-next
+#bind index,pager \Ck     sidebar-prev
+#bind index,pager \Cl  sidebar-open
+
+bind index <enter>    select-entry
+bind index N            search-opposite
+bind pager N            search-opposite
+bind index gg           first-entry
+bind index G            last-entry
+bind index R            group-reply
+bind index <F5>         sync-mailbox
+bind index <space>      collapse-thread
+macro index ga          "<sidebar-scroll-up><change-folder> =INBOX<enter>"
+macro index gk          "<sidebar-scroll-down><change-folder> =INBOX/kde<enter>"
+bind attach <enter>     view-mailcap 
+
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
+
+set status_chars  = " *%A"
+set status_format = "───[%r-valentin@rusu.info]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+set sort = threads
+set sort_aux = reverse-last-date-received
+set uncollapse_jump
+set sort_re
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+
+set realname        ='Valentin Rusu'
+set from            ="valentin@rusu.info"
+set envelope_from   =yes
+alternates "(valentin@rusu\.info)|(kde@rusu\.info)|(valentin\.i\.rusu@gmail\.com)"
+set use_from
+
+macro index \e1 ":set from=valentin@rusu.info\n:set status_format = \"───[%r-valentin@rusu.info]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───\"\n" "Switch to valentin@rusu.info"
+macro index \e2 ":set from=kde@rusu.info\n:set status_format = \"───[%r-kde@rusu.info]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───\"\n" "Switch to kde@rusu.info"
+macro index \e3 ":set from=job@rusu.info\n:set status_format = \"───[%r-kde@rusu.info]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───\"\n" "Switch to job@rusu.info"
+
+folder-hook . 'push \e1'
+folder-hook \ =INBOX 'push \e1'
+folder-hook \ =INBOX/kde 'push \e2'
+
+# mailing lists
+subscribe authentication@lists.freedesktop.org kde-core-devel@kde.org release-team@kde.org kde-frameworks-devel@kde.org
+
+# macro index t "<pipe-message>mutt2task<enter> <save-message>+TODO<enter>"
+macro index t "<pipe-message>mutt2task"
+
